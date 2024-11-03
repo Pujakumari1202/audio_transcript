@@ -1,56 +1,222 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-    <title>Upload an audio file</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Audio Uploader</title>
     <style>
-      *{
-        margin: 0;
-        padding: 0;
-      }
+        /* Reset and Base Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
         body {
             display: flex;
-            flex-direction: column; 
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
+            min-height: 100vh;
+            background-color: #f5f8fa;
+            color: #333;
         }
-        nav {
-            width: 100%;
-            background: #333;
-            height: 50px;
-            color: #fff;
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background-color: #4a90e2;
+            padding: 20px;
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-      nav a{
+            flex-direction: column;
+            align-items: flex-start;
             color: white;
-    text-decoration: none;
-      }
-        form {
+        }
+        .sidebar h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            width: 100%;
+            display: block;
+            margin-bottom: 10px;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #357ab8;
+        }
+
+        /* Main Content Layout */
+        .content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Header Styling */
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 20px;
+            font-weight: bold;
+            color: #4a90e2;
+        }
+
+        /* Form Section */
+        .upload-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .upload-section h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .upload-section form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .upload-section input[type="file"],
+        .upload-section input[type="text"],
+        .upload-section input[type="submit"] {
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .upload-section input[type="submit"] {
+            background-color: #4a90e2;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .upload-section input[type="submit"]:hover {
+            background-color: #357ab8;
+        }
+
+        /* Recent Uploads Section */
+        .recent-uploads {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             gap: 10px;
+            text-align: center;
         }
-        @media (max-width: 600px) {
-            form {
+        .card h4 {
+            font-size: 18px;
+            color: #4a90e2;
+        }
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+        .card button {
+            padding: 8px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #357ab8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .header {
+                text-align: center;
+            }
+            .upload-section, .recent-uploads {
                 width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </nav>
-    <h1>Upload an audio file</h1>
-    <form method="post" enctype="multipart/form-data">
-      <input type="file" name="file">
-      <input type="text" name="language" placeholder="Language">
-      <input type="submit" value="Upload">
-    </form>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Audio App</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Upload</a>
+        <a href="#">Recent Uploads</a>
+        <a href="#">Settings</a>
+        <a href="#">Help</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Header -->
+        <div class="header">Welcome to Audio Uploader</div>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <h3>Upload an Audio File</h3>
+            <form method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept="audio/*">
+                <input type="text" name="language" placeholder="Enter Language">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+
+        <!-- Recent Uploads Section -->
+        <section class="recent-uploads">
+            <div class="card">
+                <h4>Audio File 1</h4>
+                <p>Language: English</p>
+                <button>Play</button>
+            </div>
+            <div class="card">
+                <h4>Audio File 2</h4>
+                <p>Language: Spanish</p>
+                <button>Play</button>
+            </div>
+            <div class="card">
+                <h4>Audio File 3</h4>
+                <p>Language: French</p>
+                <button>Play</button>
+            </div>
+            <!-- Additional cards can be added here -->
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Audio Uploader. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    </footer>
 </body>
 </html>
